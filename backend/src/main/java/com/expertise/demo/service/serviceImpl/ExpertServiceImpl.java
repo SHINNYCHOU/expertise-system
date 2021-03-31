@@ -1,0 +1,30 @@
+package com.expertise.demo.service.serviceImpl;
+
+import com.expertise.demo.entity.Expert;
+import com.expertise.demo.repository.ExpertRepository;
+import com.expertise.demo.service.ExpertService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+
+@Service
+public class ExpertServiceImpl implements ExpertService {
+
+    @Autowired
+    private ExpertRepository expertrepository;
+
+    public Expert insert(String name, String gender, Date birth,String type, String area, String company,boolean secret){
+        Expert expert=new Expert(name,gender,birth,type,area,company,secret);
+        return expertrepository.save(expert);
+    }
+
+    public List <Expert> findAll(){
+        return expertrepository.findAll();
+    }
+
+    public Expert findByName(String name){
+        return expertrepository.findByName(name);
+    }
+}
