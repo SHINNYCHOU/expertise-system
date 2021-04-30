@@ -1,10 +1,15 @@
 <template>
-    <div></div>
+    <div>
+        <navi></navi>
+
+    </div>
 </template>
 
 <script>
+    import navi from "../../components/navi";
     export default {
-        name: "program"
+        name: "program",
+        components: {navi}
     }
 </script>
 

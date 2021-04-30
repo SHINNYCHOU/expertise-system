@@ -11,7 +11,8 @@
                 <!--placeholder="请输入书名" prefix-icon="el-icon-search"/>-->
                 <!--</template>-->
                 <el-table-column
-                        type="index"
+                        prop="id"
+                        label="ID"
                 >
                 </el-table-column>
                 <el-table-column
@@ -51,8 +52,8 @@
                         label="操作"
                         width="100">
                     <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                        <el-button type="text" size="small">编辑</el-button>
+                        <el-button round @click="handleClick(scope.row)" >查看</el-button>
+<!--                        <el-button round>编辑</el-button>-->
                     </template>
                 </el-table-column>
             </el-table-column>
@@ -65,7 +66,7 @@
         name: "list",
         created: function () {
         this.loadData()
-    },
+        },
         methods: {
             loadData: function () {
                 this.$http.get('http://localhost:8080/expert/get_all').then((res) => {
@@ -75,13 +76,14 @@
                     alert(err)
                 })
             },
-            handleClick(){
-
+            handleClick(row){
+                this.$router.push({path: '/expertDetail', query: {isbn: row.id}})
             }
         },
         data(){
             return{
-                tableData:[]
+                tableData:[],
+                search:''
             }
         }
     }

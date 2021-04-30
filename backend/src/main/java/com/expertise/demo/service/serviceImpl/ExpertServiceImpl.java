@@ -20,6 +20,10 @@ public class ExpertServiceImpl implements ExpertService {
         return expertrepository.save(expert);
     }
 
+    public Expert insert(Expert expert){
+        return expertrepository.save(expert);
+    }
+
     public List <Expert> findAll(){
         return expertrepository.findAll();
     }

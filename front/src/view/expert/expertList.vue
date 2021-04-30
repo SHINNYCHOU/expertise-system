@@ -1,14 +1,17 @@
 <template>
     <div>
+        <navi></navi>
         <list></list>
     </div>
 </template>
 
 <script>
 import list from "../../components/listE";
+import navi from "../../components/navi";
+// import Navi from "@/components/navi";
 export default {
     name: "expert",
-    components: {list}
+    components: {navi, list}
 }
 </script>
 

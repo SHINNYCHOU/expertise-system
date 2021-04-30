@@ -4,7 +4,9 @@ import Router from 'vue-router'
 import main from '../view/main'
 import expert from '../view/expert/expertList'
 import edit from '../view/expert/editExpert'
-import programDetail from "../view/program/programDetail";
+import expertDetail from '../view/expert/expertDetail'
+import programDetail from "../view/program/programDetail"
+import addProgram from "@/view/program/addProgram";
 
 Vue.use(Router)
 
@@ -19,12 +21,20 @@ export default new Router({
             component: expert
         },
         {
-            path: '/edit',
+            path: '/editExpert',
             component: edit
         },
         {
             path: '/programDetail',
             component: programDetail
+        },
+        {
+            path: '/expertDetail',
+            component: expertDetail
+        },
+        {
+            path: '/addProgram',
+            component: addProgram
         },
         {
             path: '/',
