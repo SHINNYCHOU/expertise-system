@@ -44,6 +44,14 @@
                 area:'核工程'
 
             }
+        },
+        created: function () {
+            this.load()
+        },
+        methods: {
+            load(){
+                this.$route.query.id
+            }
         }
     }
 </script>
