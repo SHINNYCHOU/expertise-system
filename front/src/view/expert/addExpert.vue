@@ -30,11 +30,11 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-<!--                    <el-col :span="6" style="align-items: end">-->
-<!--                        <el-form-item label="电话">-->
-<!--                            <el-input v-model="phone" ></el-input>-->
-<!--                        </el-form-item>-->
-<!--                    </el-col>-->
+                    <el-col :span="6" style="align-items: end">
+                        <el-form-item label="电话">
+                            <el-input v-model="phone" ></el-input>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
                 <el-form-item label="单位">
                     <el-input v-model="company" ></el-input>
@@ -67,8 +67,8 @@
                     </el-col>
                 </el-row>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm()">确认</el-button>
-                    <el-button @click="resetForm()">取消</el-button>
+                    <el-button type="primary" @click="submitForm()">立即创建</el-button>
+                    <el-button @click="resetForm()">重置</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -100,42 +100,21 @@
                 value: ''
             }
         },
-        mounted: function () {
-            this.load()
-        },
         methods:{
-            load() {
-                let that = this
-                var url = 'http://localhost:8080/expert/get/' + this.$route.query.id
-                this.$http.get(url, {
-                    headers: {
-                        'Access-Control-Allow-Credentials': true,
-                        'Access-Control-Allow-Origin': true
-                    }
-                })
-                    .then(res => {
-                        // console.log(res.data)
-                        that.name = res.data.name
-                        that.gender = res.data.gender
-                        that.birth =res.data.birth
-                        that.type = res.data.type
-                        that.area = res.data.area
-                        that.company = res.data.company
-                        that.secret = res.data.secret
-                        console.log(res.data.store)
-                        // console.log(that.isbn)
-                    }).catch(error => {
-                    JSON.stringify(error)
-                    console.log(error)
-                })
-            },
             resetForm(){
-                this.$router.push({path: '/expertDetail', query: {id: this.$route.query.id}})
+                this.birth='',
+                    this.name='',
+                    this.phone='',
+                    this.gender='',
+                    this.secret='',
+                    this.company='',
+                    this.type='',
+                    this.area='',
+                    this.birth=''
             },
             submitForm(){
                 // let that = this
                let data = {
-                   id:this.$route.query.id,
                     name: this.name,
                     phone: this.phone,
                    gender: this.gender,

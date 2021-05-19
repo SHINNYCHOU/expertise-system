@@ -19,7 +19,7 @@
              this.$router.push({path: '/expert'})
          },
          toProgram: function () {
-             this.$router.push({path: '/programDetail'})
+             this.$router.push({path: '/programList'})
          },
          toEditExpert: function () {
              this.$router.push({path: '/editExpert'})

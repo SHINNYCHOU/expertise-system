@@ -21,20 +21,26 @@ public class RecordController {
         return recordservice.insert(record);
     }
 
-    @GetMapping(value = "/get/{pid}")
+    @GetMapping(value = "/get/{id}")
+    public Record findById(@PathVariable(value = "id") Integer id)
+    {
+        return recordservice.findById(id);
+    }
+
+    @GetMapping(value = "/getP/{pid}")
     public List<Record> findByProgram(@PathVariable(value = "pid") Integer pid)
     {
         return recordservice.findByProgram(pid);
     }
 
-    @GetMapping(value = "/get/{eid}")
+    @GetMapping(value = "/getE/{eid}")
     public List<Record> findByExpert(@PathVariable(value = "eid") Integer eid)
     {
         return recordservice.findByExpert(eid);
     }
 
-    @DeleteMapping(value = "/delete")
-    public String delete(Integer id){
+    @DeleteMapping(value = "/delete/{id}")
+    public String delete(@PathVariable(value = "id") Integer id){
         return recordservice.delete(id);
     }
 

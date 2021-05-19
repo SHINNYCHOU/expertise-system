@@ -31,4 +31,9 @@ public class ExpertServiceImpl implements ExpertService {
     public Expert findByName(String name){
         return expertrepository.findByName(name);
     }
+
+    @Override
+    public Expert findById(Integer id) {
+        return expertrepository.findById(id);
+    }
 }

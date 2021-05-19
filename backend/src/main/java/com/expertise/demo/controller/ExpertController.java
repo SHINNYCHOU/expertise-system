@@ -47,4 +47,10 @@ public class ExpertController {
     {
         return expertservice.findByName(name);
     }
+
+    @GetMapping(value = "/get/{id}")
+    public Expert findById(@PathVariable(value = "id") Integer id)
+    {
+        return expertservice.findById(id);
+    }
 }

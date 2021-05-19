@@ -26,10 +26,15 @@ public class ProgramController {
         return programservice.insert(program);
     }
 
-    @GetMapping(value = "/find/{name}")
+    @GetMapping(value = "/find/{id}")
     public Optional<Program> findById(@PathVariable(value = "id") Integer id)
     {
         return programservice.findById(id);
     }
+
+//    @DeleteMapping(value = "/delete")
+//    public String delete(Integer id){
+//        return programservice.delete(id);
+//    }
 
 }

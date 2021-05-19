@@ -29,15 +29,17 @@
                 <el-table-column
                         prop="type"
                         label="类型"
+                        sortable
                 ></el-table-column>
                 <el-table-column
                         prop="area"
                         label="领域"
+                        sortable
                 ></el-table-column>
                 <el-table-column
                         prop="company"
                         label="单位"
-                        width="200"
+                        sortable
                 ></el-table-column>
                 <el-table-column
                         prop="secret"
@@ -49,7 +51,7 @@
                         width="100">
                     <template slot-scope="scope">
                         <el-button round @click="handleClick(scope.row)" >查看</el-button>
-<!--                        <el-button round>编辑</el-button>-->
+                        <el-button round @click="handleClick(scope.row)">选择</el-button>
                     </template>
                 </el-table-column>
             </el-table-column>
@@ -67,12 +69,6 @@
             loadData: function () {
                 this.$http.get('http://localhost:8080/expert/get_all').then((res) => {
                     this.tableData = res.data
-                    for (var i = 0; i < this.tableData.length; i++) {
-                        if (this.tableData[i].secret) this.tableData[i].secret='机密'
-                        else this.tableData[i].secret='非机密'
-                        var d = new Date(this.tableData[i].birth)
-                        this.tableData[i].birth = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() //+ ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
-                    }
                     console.log(res)
                 }).catch(function (err) {
                     alert(err)
@@ -80,6 +76,34 @@
             },
             handleClick(row){
                 this.$router.push({path: '/expertDetail', query: {id: row.id}})
+            },
+            handlePick(row){
+                let data = {
+                    expertID: row.id,
+                    programID: this.number,
+                    time:this.company,
+            }
+                var url = 'http://localhost:8080/record/insert/'
+                this.$http({
+                    method: 'post',
+                    url: url,
+                    headers: {
+                        'Access-Control-Allow-Credentials': true,
+                        'Access-Control-Allow-Origin': true,
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify(data)
+                })
+                    .then(response => {
+                        console.log(response.data)
+                        console.log('get response')
+                        //redirect
+                        this.$router.push({path: '/programList'})
+                    })
+                    .catch(error => {
+                        JSON.stringify(error)
+                        console.log(error)
+                    })
             }
         },
         data(){

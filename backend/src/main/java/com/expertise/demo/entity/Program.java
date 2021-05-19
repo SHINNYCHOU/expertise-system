@@ -13,6 +13,7 @@ public class Program {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String area;
+    private String type;
     private String keyword;
     private Date time;
     private String company;
@@ -21,8 +22,9 @@ public class Program {
 
     public Program(){}
 
-    public Program(String area,String keyword,Date time,String company,int state,int number){
+    public Program(String area,String type,String keyword,Date time,String company,int state,int number){
         this.area=area;
+        this.type=type;
         this.company=company;
         this.keyword=keyword;
         this.number=number;
