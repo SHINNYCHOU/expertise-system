@@ -54,6 +54,30 @@
                 </el-table-column>
             </el-table-column>
         </el-table>
+      <div style="text-align: center; margin-top: 10px">
+        <el-button type="primary" icon="el-icon-user-solid" @click="dumpAsExcel">导出专家列表</el-button>
+        <el-button type="primary" icon="el-icon-user-solid" @click="uploadExcel">导入专家列表</el-button>
+      </div>
+      <el-dialog
+          title="上传专家信息"
+          :visible.sync="dialogVisible"
+          width="500px">
+        <div style="text-align: center">
+          <el-upload
+              class="upload-demo"
+              drag
+              :with-credentials="true"
+              action="http://localhost:8080/file/importexcel"
+              multiple>
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div class="el-upload__tip" slot="tip">只能上传xls/xlsx文件</div>
+          </el-upload>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="afterUpload">完 成</el-button>
+        </span>
+      </el-dialog>
     </div>
 </template>
 
@@ -80,12 +104,25 @@
             },
             handleClick(row){
                 this.$router.push({path: '/expertDetail', query: {id: row.id}})
+            },
+            dumpAsExcel:function() {
+              // todo: dowload URL
+              window.open("http://localhost:8080/file/downloadexcel", "_blank");
+              console.log("dump")
+            },
+            uploadExcel:function() {
+              this.dialogVisible = true
+              console.log("upload")
+            },
+            afterUpload:function () {
+              location.reload()
             }
         },
         data(){
             return{
                 tableData:[],
-                search:''
+                search:'',
+                dialogVisible: false
             }
         }
     }
