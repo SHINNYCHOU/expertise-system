@@ -35,7 +35,7 @@ public class fileController {
     public static void download(HttpServletResponse response, Class t, List list) throws IOException, IllegalAccessException,InstantiationException {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
-        response.setHeader("Content-disposition", "attachment;filename=专家列表.xlsx");
+        response.setHeader("Content-disposition", "attachment;filename=expertList.xlsx");
         EasyExcel.write(response.getOutputStream(), t).sheet("专家列表").doWrite(list);
     }
 

@@ -11,8 +11,7 @@ import java.util.Date;
 @Data
 public class Expert {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @ExcelProperty("专家编号")
+    @ExcelProperty("专家身份证号")
     private Integer id;
     @ExcelProperty("专家姓名")
     private String name;
