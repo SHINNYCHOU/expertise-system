@@ -66,7 +66,8 @@
           <el-upload
               class="upload-demo"
               drag
-              action="https://jsonplaceholder.typicode.com/posts/"
+              :with-credentials="true"
+              action="http://localhost:8080/file/importexcel"
               multiple>
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -106,6 +107,7 @@
             },
             dumpAsExcel:function() {
               // todo: dowload URL
+              window.open("http://localhost:8080/file/downloadexcel", "_blank");
               console.log("dump")
             },
             uploadExcel:function() {
