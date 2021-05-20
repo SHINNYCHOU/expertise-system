@@ -20,11 +20,16 @@
                 <el-table-column
                         prop="gender"
                         label="性别"
+                        width="50"
                 ></el-table-column>
                 <el-table-column
                         prop="birth"
                         label="生日"
                         sortable
+                ></el-table-column>
+                <el-table-column
+                        prop="phone"
+                        label="电话"
                 ></el-table-column>
                 <el-table-column
                         prop="type"
@@ -42,6 +47,7 @@
                 <el-table-column
                         prop="secret"
                         label="是否机密"
+                        width="50"
                 ></el-table-column>
                 <el-table-column
                         fixed="right"
@@ -92,8 +98,8 @@
                 this.$http.get('http://localhost:8080/expert/get_all').then((res) => {
                     this.tableData = res.data
                     for (var i = 0; i < this.tableData.length; i++) {
-                        if (this.tableData[i].secret) this.tableData[i].secret='机密'
-                        else this.tableData[i].secret='非机密'
+                        // if (this.tableData[i].secret) this.tableData[i].secret='机密'
+                        // else this.tableData[i].secret='非机密'
                         var d = new Date(this.tableData[i].birth)
                         this.tableData[i].birth = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() //+ ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
                     }

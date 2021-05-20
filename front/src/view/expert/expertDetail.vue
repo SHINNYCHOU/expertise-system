@@ -40,6 +40,10 @@
                                     label="评价"
                                     width="400"
                             ></el-table-column>
+                            <el-table-column
+                                    prop="ontime"
+                                    label="分数"
+                            ></el-table-column>
 <!--                            <el-table-column-->
 <!--                                    prop="type"-->
 <!--                                    label="类型"-->
@@ -49,12 +53,34 @@
                                     label="操作"
                                     width="150">
                                 <template slot-scope="scope">
-                                    <el-button round size="small" @click="handleClick(scope.row)" >评价</el-button>
+                                    <el-button round size="small" @click="handleComment(scope.row)" >评价</el-button>
                                     <el-button round size="small" @click="handleDelete(scope.row)">删除</el-button>
                                 </template>
                             </el-table-column>
                         </el-table-column>
                     </el-table>
+                    <el-dialog title="输入评价" :visible.sync="dialogVisible">
+                        <el-input
+                                v-model="comment"
+                                clearable
+                                placeholder="请填写描述"
+                        />
+                        <!--                        <el-input-->
+                        <!--                                style="margin: 30px"-->
+                        <!--                                v-model="rate"-->
+                        <!--                                maxlength="8"-->
+                        <!--                                placeholder="请选择整体分数"-->
+                        <!--                                @input="change($event)"-->
+                        <!--                        />-->
+                        <div class="block">
+                            <span class="demonstration">选择整体分数</span>
+                            <el-slider v-model="rate"></el-slider>
+                        </div>
+                        <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="pushComment()">确 定</el-button>
+                        </span>
+                    </el-dialog>
                 </el-main>
             </el-container>
 
@@ -96,6 +122,7 @@
         components: {navi},
         data(){
             return{
+                expertID:'',
                 name:'赵旭',
                 gender:'男',
                 age:'42',
@@ -104,6 +131,11 @@
                 company:'',
                 secret: '',
                 showRecord:false,
+                dialogVisible:false,
+                commentID:'',
+                clickedrecord:'',
+                comment:'',
+                rate:'',
                 tableData:[]
             }
         },
@@ -123,15 +155,16 @@
                     .then(res => {
                         console.log(res.data)
                         // console.log(this)
+                        this.expertID=res.data.id
                         that.name = res.data.name
                         that.gender = res.data.gender
                         // that.age =
                         that.type = res.data.type
                         that.area = res.data.area
                         that.company = res.data.company
-                        // that.secret = res.data.secret
-                        if ( res.data.secret) that.secret='机密'
-                        else that.secret='非机密'
+                        that.secret = res.data.secret
+                        // if ( res.data.secret) that.secret='机密'
+                        // else that.secret='非机密'
                         var birthday=res.data.birth;
                         var birthday_time=birthday.split("-");
                         var birthYear = birthday_time[0];
@@ -151,6 +184,9 @@
                 }).catch(function (err) {
                     alert(err)
                 })
+            },
+            change () {
+                // this.$forceUpdate()
             },
             handleDelete(row){
                 var url = 'http://localhost:8080/record/delete/'+row.id
@@ -175,6 +211,44 @@
                     message: '已移除此项目',
                     type: 'warning'
                 });
+            },
+            handleComment(row){
+                this.dialogVisible=true
+                // this.commentID=row.id
+                this.clickedrecord=row
+            },
+            pushComment(){
+                let data = {
+                    id:this.clickedrecord.id,
+                    expertID:this.expertID,
+                    programID:this.clickedrecord.programID,
+                    time: this.clickedrecord.time,
+                    comment: this.comment,
+                    ontime: this.rate
+
+                }
+                var url = 'http://localhost:8080/record/update'
+                this.$http({
+                    method: 'post',
+                    url: url,
+                    headers: {
+                        'Access-Control-Allow-Credentials': true,
+                        'Access-Control-Allow-Origin': true,
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify(data)
+                })
+                    .then(response => {
+                        console.log(response.data)
+                        console.log('get response')
+                        //redirect
+                        // this.$router.push({path: '/expert'})
+                    })
+                    .catch(error => {
+                        JSON.stringify(error)
+                        console.log(error)
+                    })
+                this.dialogVisible = false
             },
             edit(){
                 this.$router.push({path: '/reverseExpert', query: {id: this.$route.query.id}})

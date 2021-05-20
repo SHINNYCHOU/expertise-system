@@ -53,10 +53,21 @@
                         <el-form-item label="类型">
 <!--                            <el-input v-model="Form.type" ></el-input>-->
                             <el-select v-model="type" placeholder="请选择">
-                                <el-option label="学术" value="学术"></el-option>
-                                <el-option label="财务" value="财务"></el-option>
-                                <el-option label="法律" value="法律"></el-option>
-                                <el-option label="其他" value="其他"></el-option>
+                                <el-option label="集成电路" value="集成电路"></el-option>
+                                <el-option label="人工智能" value="人工智能"></el-option>
+                                <el-option label="生物医药" value="生物医药"></el-option>
+                                <el-option label="网络空间" value="网络空间"></el-option>
+                                <el-option label="新能源" value="新能源"></el-option>
+                                <el-option label="核能" value="核能"></el-option>
+                                <el-option label="航天" value="航天"></el-option>
+                                <el-option label="航空" value="航空"></el-option>
+                                <el-option label="船舶（含海洋工程）" value="船舶（含海洋工程）"></el-option>
+                                <el-option label="电子信息" value="电子信息"></el-option>
+                                <el-option label="新材料" value="新材料"></el-option>
+                                <el-option label="智能装备" value="智能装备"></el-option>
+                                <el-option label="应急" value="应急"></el-option>
+                                <el-option label="空间信息（含北斗导航）" value="空间信息（含北斗导航）"></el-option>
+                                <el-option label="其他（含财务）" value="其他（含财务）"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -91,11 +102,14 @@
                     area:'',
                     birth:'',
                 secretoptions: [{
-                    value: 'true',
-                    label: '机密人员'
+                    value: '机密',
+                    label: '机密'
                 }, {
-                    value: 'false',
-                    label: '非机密人员'
+                    value: '秘密',
+                    label: '秘密'
+                }, {
+                    value: '涉密',
+                    label: '涉密'
                 }],
                 value: ''
             }

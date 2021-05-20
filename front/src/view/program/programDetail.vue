@@ -40,6 +40,10 @@
                                     label="评价"
                                     width="400"
                             ></el-table-column>
+                            <el-table-column
+                                    prop="ontime"
+                                    label="分数"
+                            ></el-table-column>
                             <!--                            <el-table-column-->
                             <!--                                    prop="type"-->
                             <!--                                    label="类型"-->
@@ -60,7 +64,6 @@
                                 v-model="comment"
                                 clearable
                                 placeholder="请填写描述"
-                                @input="change($event)"
                         />
 <!--                        <el-input-->
 <!--                                style="margin: 30px"-->
@@ -156,7 +159,7 @@
                 tableData:[],
                 candidate:[],
                 search:'',
-                // programId:'',
+                programId:'',
                 type:'技术',
                 area:'核工程',
                 keyword:'',
@@ -165,7 +168,7 @@
                 company:'',
                 state: '',
                 dialogVisible:false,
-                commentID:'',
+                clickedrecord:'',
                 comment:'',
                 rate:''
             }
@@ -189,7 +192,7 @@
                     .then(res => {
                         console.log(res.data)
                         // console.log(this)
-                        // this.programID=res.data.id
+                        this.programID=res.data.id
                         that.number = res.data.number
                         that.time = res.data.time
                         that.type = res.data.type
@@ -222,11 +225,40 @@
             },
             handleComment(row){
                 this.dialogVisible=true
-                this.commentID=row.id
+                this.clickedrecord=row
             },
             pushComment(){
+                let data = {
+                    id:this.clickedrecord.id,
+                    expertID:this.clickedrecord.expertID,
+                    programID:this.programID,
+                    time: this.time,
+                    comment: this.comment,
+                    ontime: this.rate
+
+                }
+                var url = 'http://localhost:8080/record/update'
+                this.$http({
+                    method: 'post',
+                    url: url,
+                    headers: {
+                        'Access-Control-Allow-Credentials': true,
+                        'Access-Control-Allow-Origin': true,
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify(data)
+                })
+                    .then(response => {
+                        console.log(response.data)
+                        console.log('get response')
+                        //redirect
+                        // this.$router.push({path: '/expert'})
+                    })
+                    .catch(error => {
+                        JSON.stringify(error)
+                        console.log(error)
+                    })
                 this.dialogVisible = false
-                // var url = 'http://localhost:8080/record/get/'+this.commentID
             },
             handleDelete(row){
                 var url = 'http://localhost:8080/record/delete/'+row.id

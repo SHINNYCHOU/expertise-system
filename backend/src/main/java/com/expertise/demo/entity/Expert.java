@@ -19,21 +19,24 @@ public class Expert {
     private String gender;
     @ExcelProperty("出生年月")
     private Date birth;
-    @ExcelProperty("专家类型")
+    @ExcelProperty("电话")
+    private String phone;
+    @ExcelProperty("行业领域")
     private String type;
-    @ExcelProperty("专家地区")
+    @ExcelProperty("专业描述")
     private String area;
     @ExcelProperty("专家所属单位")
     private String company;
-    @ExcelProperty("是否机密")
-    private boolean secret;
+    @ExcelProperty("机密等级")
+    private String secret;
 
     public Expert(){}
 
-    public Expert(String name, String gender, Date birth, String type, String area, String company, boolean secret) {
+    public Expert(String name, String gender, Date birth, String phone, String type, String area, String company, String secret) {
         this.area=area;
         this.name=name;
         this.birth=birth;
+        this.phone=phone;
         this.company=company;
         this.gender=gender;
         this.secret=secret;
@@ -72,6 +75,10 @@ public class Expert {
         this.birth = birth;
     }
 
+    public String getPhone(){return phone;}
+
+    public void setPhone(String phone){this.phone=phone;}
+
     public String getType() {
         return type;
     }
@@ -96,11 +103,11 @@ public class Expert {
         this.company = company;
     }
 
-    public boolean isSecret() {
+    public String isSecret() {
         return secret;
     }
 
-    public void setSecret(boolean secret) {
+    public void setSecret(String secret) {
         this.secret = secret;
     }
 }

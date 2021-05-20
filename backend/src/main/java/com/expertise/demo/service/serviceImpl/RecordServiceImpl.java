@@ -20,6 +20,12 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
+    public Record update(Record record) {
+
+        return recordRepository.save(record);
+    }
+
+    @Override
     public Record findById(Integer id) {
         return recordRepository.findById(id);
     }

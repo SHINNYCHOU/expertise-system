@@ -21,6 +21,11 @@ public class RecordController {
         return recordservice.insert(record);
     }
 
+    @PostMapping(value = "/update")
+    public Record updateRecord(@RequestBody Record record){
+        return recordservice.update(record);
+    }
+
     @GetMapping(value = "/get/{id}")
     public Record findById(@PathVariable(value = "id") Integer id)
     {
