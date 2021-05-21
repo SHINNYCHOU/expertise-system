@@ -27,11 +27,17 @@ public class ProgramController {
     }
 
     @GetMapping(value = "/find/{id}")
-    public Optional<Program> findById(@PathVariable(value = "id") Integer id)
+    public Program findById(@PathVariable(value = "id") Integer id)
     {
         return programservice.findById(id);
     }
 
+    @GetMapping(value = "/auto/{id}")
+    public Integer autoChoose(@PathVariable(value = "id") Integer id){
+//        Program p=programservice.findById(id);
+        programservice.autoChoose(id);
+        return id;
+    }
 //    @DeleteMapping(value = "/delete")
 //    public String delete(Integer id){
 //        return programservice.delete(id);

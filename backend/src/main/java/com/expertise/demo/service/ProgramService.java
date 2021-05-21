@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface ProgramService {
     Program insert(Program program);
     List<Program> findAll();
-    Optional<Program> findById(Integer id);
+//    Optional<Program> findById(Integer id);
+    Program findById(Integer id);
+    void autoChoose(Integer id);
 }

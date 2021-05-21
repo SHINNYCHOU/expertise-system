@@ -16,6 +16,14 @@ public class RecordServiceImpl implements RecordService {
     private RecordRepository recordRepository;
 
     public Record insert(Record record){
+        //避免同一专家：先查找此项目是否有此专家
+        Integer pid=record.getProgramID();
+        List<Record> list=recordRepository.findByExpertID(record.getExpertID());
+        for(Record r:list){
+            if(r.getProgramID()==pid){
+                return r;
+            }
+        }
         return recordRepository.save(record);
     }
 

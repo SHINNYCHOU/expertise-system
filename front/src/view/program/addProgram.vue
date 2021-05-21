@@ -86,6 +86,7 @@
         components: {navi},
         data(){
             return{
+                id:'',
                     name:'',
                     number:'',
                     company:'',
@@ -130,7 +131,15 @@
                 })
                     .then(response => {
                         console.log(response.data)
+                        this.id=response.data.id
                         console.log('get response')
+                        //auto choose
+                        this.$http.get('http://localhost:8080/program/auto/'+ this.id).then((res) => {
+                            // this.tableData = res.data
+                            console.log(res.data)
+                        }).catch(function (err) {
+                            alert(err)
+                        })
                         //redirect
                         this.$router.push({path: '/programList'})
                     })
@@ -138,8 +147,7 @@
                         JSON.stringify(error)
                         console.log(error)
                     })
-                //auto choose
-                
+
             }
         }
     }
