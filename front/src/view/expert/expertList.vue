@@ -1,7 +1,7 @@
 <template>
     <div>
         <navi></navi>
-        <list style="margin-top: 30px"></list>
+        <list style="margin-top: 10px"></list>
     </div>
 </template>
 

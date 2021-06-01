@@ -21,10 +21,12 @@ public class Expert {
     private Date birth;
     @ExcelProperty("电话")
     private String phone;
-    @ExcelProperty("行业领域")
+    @ExcelProperty("类型")
     private String type;
-    @ExcelProperty("专业描述")
+    @ExcelProperty("行业领域")
     private String area;
+    @ExcelProperty("简介")
+    private String introduction;
     @ExcelProperty("专家所属单位")
     private String company;
     @ExcelProperty("机密等级")
@@ -32,8 +34,9 @@ public class Expert {
 
     public Expert(){}
 
-    public Expert(String name, String gender, Date birth, String phone, String type, String area, String company, String secret) {
+    public Expert(String name, String gender, Date birth, String phone, String type, String area, String introduction, String company, String secret) {
         this.area=area;
+        this.introduction=introduction;
         this.name=name;
         this.birth=birth;
         this.phone=phone;
@@ -94,6 +97,10 @@ public class Expert {
     public void setArea(String area) {
         this.area = area;
     }
+
+    public String getIntroduction(){return this.introduction;}
+
+    public  void setIntroduction(String introduction){this.introduction=introduction;}
 
     public String getCompany() {
         return company;

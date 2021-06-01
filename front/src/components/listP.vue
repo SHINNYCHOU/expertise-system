@@ -69,6 +69,12 @@
             load: function (){
                 this.$http.get('http://localhost:8080/program/get_all').then((res) => {
                     this.tableData = res.data
+                    for (var i = 0; i < this.tableData.length; i++) {
+                        // if (this.tableData[i].secret) this.tableData[i].secret='机密'
+                        // else this.tableData[i].secret='非机密'
+                        var d = new Date(this.tableData[i].time)
+                        this.tableData[i].time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() //+ ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+                    }
                     console.log(res)
                 }).catch(function (err) {
                     alert(err)

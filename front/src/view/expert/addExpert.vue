@@ -9,6 +9,11 @@
                             <el-input v-model="name" ></el-input>
                         </el-form-item>
                     </el-col>
+                    <el-col :span="6">
+                        <el-form-item label="证件号">
+                            <el-input v-model="id" ></el-input>
+                        </el-form-item>
+                    </el-col>
                     <el-col :span="4">
                         <el-form-item label="性别">
                             <el-select v-model="gender" clearable placeholder="请选择">
@@ -35,6 +40,15 @@
                             <el-input v-model="phone" ></el-input>
                         </el-form-item>
                     </el-col>
+                    <el-col :span="6" style="align-items: end">
+                        <el-form-item label="类型">
+                            <el-select v-model="type" clearable placeholder="请选择">
+                                <el-option label="专业" value="专业"></el-option>
+                                <el-option label="财务" value="财务"></el-option>
+                                <el-option label="其他" value="其他"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
                 <el-form-item label="单位">
                     <el-input v-model="company" ></el-input>
@@ -50,9 +64,9 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
-                        <el-form-item label="类型">
+                        <el-form-item label="领域">
 <!--                            <el-input v-model="Form.type" ></el-input>-->
-                            <el-select v-model="type" placeholder="请选择">
+                            <el-select v-model="area" placeholder="请选择">
                                 <el-option label="集成电路" value="集成电路"></el-option>
                                 <el-option label="人工智能" value="人工智能"></el-option>
                                 <el-option label="生物医药" value="生物医药"></el-option>
@@ -72,8 +86,8 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="9">
-                        <el-form-item label="领域">
-                            <el-input v-model="area" ></el-input>
+                        <el-form-item label="简介">
+                            <el-input v-model="introduction" ></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -93,6 +107,7 @@
         components: {navi},
         data(){
             return{
+                id:'',
                     name:'',
                     phone:'',
                     gender:'',
@@ -100,6 +115,7 @@
                     company:'',
                     type:'',
                     area:'',
+                    introduction:'',
                     birth:'',
                 secretoptions: [{
                     value: '机密',
@@ -108,8 +124,8 @@
                     value: '秘密',
                     label: '秘密'
                 }, {
-                    value: '涉密',
-                    label: '涉密'
+                    value: '绝密',
+                    label: '绝密'
                 }],
                 value: ''
             }
@@ -117,6 +133,7 @@
         methods:{
             resetForm(){
                 this.birth='',
+                    this.id='',
                     this.name='',
                     this.phone='',
                     this.gender='',
@@ -124,11 +141,13 @@
                     this.company='',
                     this.type='',
                     this.area='',
+                    this.introduction='',
                     this.birth=''
             },
             submitForm(){
                 // let that = this
                let data = {
+                   id:this.id,
                     name: this.name,
                     phone: this.phone,
                    gender: this.gender,
@@ -136,6 +155,7 @@
                    company:this.company,
                    type: this.type,
                    area:this.area,
+                   introduction:this.introduction,
                    birth: this.birth
                 }
                 var url = 'http://localhost:8080/expert/insert/'
