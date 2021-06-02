@@ -18,6 +18,54 @@ public class Record {
     private String comment;
     private int ontime;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getExpertID() {
+        return expertID;
+    }
+
+    public void setExpertID(Integer expertID) {
+        this.expertID = expertID;
+    }
+
+    public Integer getProgramID() {
+        return programID;
+    }
+
+    public void setProgramID(Integer programID) {
+        this.programID = programID;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getOntime() {
+        return ontime;
+    }
+
+    public void setOntime(int ontime) {
+        this.ontime = ontime;
+    }
+
     public Record(){}
 
     public Record(Integer expertID,Integer programID,Date time,String comment,int ontime){
