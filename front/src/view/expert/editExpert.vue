@@ -188,7 +188,7 @@
                         that.gender = res.data.gender
                         that.birth =res.data.birth
                         that.type = res.data.type
-                        that.area = res.data.area
+                        that.area = res.data.area   // 把领域第一个作为主领域 后续的放入副领域
                         let arr=that.area.split(",")
                         that.firstArea=arr.length>=1?arr[0]:''
                         let list=arr.slice(1,arr.length)

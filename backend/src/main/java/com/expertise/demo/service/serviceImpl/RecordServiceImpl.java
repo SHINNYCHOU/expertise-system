@@ -20,7 +20,7 @@ public class RecordServiceImpl implements RecordService {
         Integer pid=record.getProgramID();
         List<Record> list=recordRepository.findByExpertID(record.getExpertID());
         for(Record r:list){
-            if(r.getProgramID()==pid){
+            if(r.getProgramID().equals(pid)){
                 return r;
             }
         }
