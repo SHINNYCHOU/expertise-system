@@ -24,9 +24,10 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-form-item label="单位">
-                    <el-input v-model="company" ></el-input>
+                <el-form-item label="单位" v-for="(val, index) in compNum" :key="index">
+                  <el-input v-model="compNum[index]" ></el-input>
                 </el-form-item>
+                <el-button @click="addCompany" style="margin-left: 100px; margin-top: -10px; margin-bottom: 20px">增加单位</el-button>
                 <el-row :gutter="20">
                     <el-col :span="10">
                         <el-form-item label="项目日期">
@@ -97,10 +98,18 @@
                     type:'',
                     area:'',
                     date:'',
-                    keyword: ''
+                    keyword: '',
+                    compNum: ["",],
             }
         },
         methods:{
+            addCompany() {
+              this.compNum.push("");
+              var compSum = ""
+              this.compNum.forEach((c) => {compSum += c + ", "})
+              this.company =compSum
+              console.log(this.company)
+            },
             resetForm(){
                 // this.birth='',
                     this.name='',
@@ -110,12 +119,15 @@
                     this.area='',
                     this.date='',
                     this.keyword=''
+                    this.compNum=["",]
             },
             submitForm(){
+              var compSum = ""
+              this.compNum.forEach((c) => {compSum += c + ", "})
                 let data = {
                     name: this.name,
                     number: this.number,
-                    company:this.company,
+                    company: compSum,
                     type: this.type,
                     area:this.area,
                     time: this.date,

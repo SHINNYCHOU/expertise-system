@@ -59,6 +59,9 @@
                             </el-table-column>
                         </el-table-column>
                     </el-table>
+                  <el-row style="margin-top: 20px">
+                    <el-button @click="dumpAsExcel">导出项目专家</el-button>
+                  </el-row>
                     <el-dialog title="输入评价" :visible.sync="dialogVisible">
                         <el-input
                                 v-model="comment"
@@ -178,6 +181,11 @@
             this.load()
         },
         methods: {
+            dumpAsExcel:function() {
+              // todo: dowload URL
+              window.open("http://localhost:8080/file/downloadexcelbyprogram/"+this.$route.query.id, "_blank");
+              console.log("dump "+this.$route.query.id)
+            },
             change () {
                 this.$forceUpdate()
             },
