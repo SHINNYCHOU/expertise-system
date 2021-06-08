@@ -73,9 +73,29 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
-                        <el-form-item label="领域">
-<!--                            <el-input v-model="Form.type" ></el-input>-->
-                            <el-select v-model="area" filterable placeholder="请选择">
+                        <el-form-item label="主领域">
+                            <el-select v-model="firstArea" filterable placeholder="请选择">
+                                <el-option label="集成电路" value="集成电路"></el-option>
+                                <el-option label="人工智能" value="人工智能"></el-option>
+                                <el-option label="生物医药" value="生物医药"></el-option>
+                                <el-option label="网络空间" value="网络空间"></el-option>
+                                <el-option label="新能源" value="新能源"></el-option>
+                                <el-option label="核能" value="核能"></el-option>
+                                <el-option label="航天" value="航天"></el-option>
+                                <el-option label="航空" value="航空"></el-option>
+                                <el-option label="船舶（含海洋工程）" value="船舶（含海洋工程）"></el-option>
+                                <el-option label="电子信息" value="电子信息"></el-option>
+                                <el-option label="新材料" value="新材料"></el-option>
+                                <el-option label="智能装备" value="智能装备"></el-option>
+                                <el-option label="应急" value="应急"></el-option>
+                                <el-option label="空间信息（含北斗导航）" value="空间信息（含北斗导航）"></el-option>
+                                <el-option label="其他（含财务）" value="其他（含财务）"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-form-item label="副领域">
+                            <el-select v-model="secondaryArea" filterable multiple placeholder="请选择">
                                 <el-option label="集成电路" value="集成电路"></el-option>
                                 <el-option label="人工智能" value="人工智能"></el-option>
                                 <el-option label="生物医药" value="生物医药"></el-option>
@@ -98,6 +118,7 @@
                         <el-form-item label="简介">
                             <el-input v-model="introduction" ></el-input>
                         </el-form-item>
+<!--                        <p>{{firstArea+secondaryArea}}</p>-->
                     </el-col>
                 </el-row>
                 <el-form-item>
@@ -116,16 +137,18 @@
         components: {navi},
         data(){
             return{
-                    id:'',
-                    name:'',
-                    phone:'',
-                    gender:'',
-                    secret:'',
-                    company:'',
-                    type:'',
-                    area:'',
-                    introduction:'',
-                    birth:'',
+                id:'',
+                name:'',
+                phone:'',
+                gender:'',
+                secret:'',
+                company:'',
+                type:'',
+                area:'',
+                firstArea:'',
+                secondaryArea:'',
+                introduction:'',
+                birth:'',
                 secretoptions: [{
                     value: '一般',
                     label: '一般'
@@ -146,7 +169,7 @@
                 this.$forceUpdate()
             },
             resetForm(){
-                    this.birth='',
+                this.birth='',
                     this.id='',
                     this.name='',
                     this.phone='',
@@ -157,11 +180,14 @@
                     this.company='',
                     this.type='',
                     this.area='',
+                    this.firstArea='',
+                    this.secondaryArea='',
                     this.introduction='',
                     this.birth=''
             },
             submitForm(){
                 // let that = this
+                this.area=this.firstArea+','+this.secondaryArea
                let data = {
                    id:this.id,
                     name: this.name,

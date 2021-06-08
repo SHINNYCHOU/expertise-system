@@ -26,11 +26,11 @@ public class Record {
         this.id = id;
     }
 
-    public Integer getExpertID() {
+    public String getExpertID() {
         return expertID;
     }
 
-    public void setExpertID(Integer expertID) {
+    public void setExpertID(String expertID) {
         this.expertID = expertID;
     }
 

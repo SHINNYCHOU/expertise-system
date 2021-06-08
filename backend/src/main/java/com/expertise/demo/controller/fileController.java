@@ -44,7 +44,7 @@ public class fileController {
         List<Record> records = recordService.findByProgram(id);
         List<Expert> list = new ArrayList<>();
         records.forEach(record -> {
-            Integer expertId = record.getExpertID();
+            String expertId = record.getExpertID();
             list.add(expertservice.findById(expertId));
         });
         this.download(response,Expert.class,list);

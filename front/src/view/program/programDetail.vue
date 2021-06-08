@@ -60,7 +60,8 @@
                         </el-table-column>
                     </el-table>
                   <el-row style="margin-top: 20px">
-                    <el-button @click="dumpAsExcel">导出项目专家</el-button>
+                      <el-button @click="autoChoose">自动选择项目专家</el-button>
+                      <el-button @click="dumpAsExcel">导出项目专家</el-button>
                   </el-row>
                     <el-dialog title="输入评价" :visible.sync="dialogVisible">
                         <el-input
@@ -185,6 +186,14 @@
               // todo: dowload URL
               window.open("http://localhost:8080/file/downloadexcelbyprogram/"+this.$route.query.id, "_blank");
               console.log("dump "+this.$route.query.id)
+            },
+            autoChoose:function(){
+                this.$http.get('http://localhost:8080/program/auto/'+ this.$route.query.id).then((res) => {
+                    // this.tableData = res.data
+                    console.log(res.data)
+                }).catch(function (err) {
+                    alert(err)
+                })
             },
             change () {
                 this.$forceUpdate()
