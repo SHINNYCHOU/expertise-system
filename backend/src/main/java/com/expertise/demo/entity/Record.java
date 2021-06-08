@@ -12,7 +12,7 @@ public class Record {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    private Integer expertID;
+    private String expertID;
     private Integer programID;
     private Date time;
     private String comment;
@@ -20,7 +20,7 @@ public class Record {
 
     public Record(){}
 
-    public Record(Integer expertID,Integer programID,Date time,String comment,int ontime){
+    public Record(String expertID,Integer programID,Date time,String comment,int ontime){
         this.comment=comment;
         this.expertID=expertID;
         this.programID=programID;

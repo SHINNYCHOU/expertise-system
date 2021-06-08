@@ -39,7 +39,7 @@ public class RecordController {
     }
 
     @GetMapping(value = "/getE/{eid}")
-    public List<Record> findByExpert(@PathVariable(value = "eid") Integer eid)
+    public List<Record> findByExpert(@PathVariable(value = "eid") String eid)
     {
         return recordservice.findByExpert(eid);
     }

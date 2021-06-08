@@ -165,6 +165,7 @@
                 keyword:'',
                 number:'',
                 time:'',
+                realtime:'',
                 company:'',
                 state: '',
                 dialogVisible:false,
@@ -194,7 +195,9 @@
                         // console.log(this)
                         this.programID=res.data.id
                         that.number = res.data.number
-                        that.time = res.data.time
+                        that.realtime = res.data.time
+                        var d = new Date(res.data.time)
+                        that.time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() //+ ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
                         that.type = res.data.type
                         that.area = res.data.area
                         that.keyword = res.data.keyword
@@ -208,12 +211,20 @@
                 })
                 this.$http.get('http://localhost:8080/record/getP/'+ this.$route.query.id).then((res) => {
                     this.tableData = res.data
+                    for (var i = 0; i < this.tableData.length; i++) {
+                        var d = new Date(this.tableData[i].time)
+                        this.tableData[i].time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+                    }
                     console.log(res.data)
                 }).catch(function (err) {
                     alert(err)
                 })
                 this.$http.get('http://localhost:8080/expert/get_all').then((res) => {
                     this.candidate = res.data
+                    for (var i = 0; i < this.tableData.length; i++) {
+                        var d = new Date(this.tableData[i].birth)
+                        this.tableData[i].birth = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() //+ ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+                    }
                     // console.log(res.data)
                 }).catch(function (err) {
                     alert(err)
@@ -232,7 +243,7 @@
                     id:this.clickedrecord.id,
                     expertID:this.clickedrecord.expertID,
                     programID:this.programID,
-                    time: this.time,
+                    time: this.realtime,
                     comment: this.comment,
                     ontime: this.rate
 
@@ -259,6 +270,7 @@
                         console.log(error)
                     })
                 this.dialogVisible = false
+                this.$router.go(0)
             },
             handleDelete(row){
                 var url = 'http://localhost:8080/record/delete/'+row.id
@@ -291,7 +303,7 @@
                 let data = {
                     expertID: row.id,
                     programID: this.$route.query.id,
-                    time:this.time,
+                    time:this.realtime,
                 }
                 console.log(data)
                 var url = 'http://localhost:8080/record/insert/'

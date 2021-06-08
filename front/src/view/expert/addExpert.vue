@@ -15,17 +15,17 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="4">
-                        <el-form-item label="性别">
-                            <el-select v-model="gender" clearable placeholder="请选择">
-                                <el-option label="男" value="男"></el-option>
-                                <el-option label="女" value="女"></el-option>
-                                <el-option label="其他" value=" "></el-option>
+                        <el-form-item label="是否机密">
+                            <el-select v-model="secretFlag" @change="getService" placeholder="请选择">
+                                <el-option label="是" value="是"></el-option>
+                                <el-option label="否" value="否"></el-option>
+<!--                                <el-option label="其他" value=" "></el-option>-->
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
-                        <el-form-item label="是否机密">
-                            <el-select v-model="secret" placeholder="请选择">
+                        <el-form-item label="密级">
+                            <el-select v-model="secret" :disabled="secretshow" placeholder="请选择">
                                 <el-option
                                         v-for="item in secretoptions"
                                         :key="item.value"
@@ -49,6 +49,15 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
+                    <el-col :span="4">
+                        <el-form-item label="性别">
+                            <el-select v-model="gender" clearable placeholder="请选择">
+                                <el-option label="男" value="男"></el-option>
+                                <el-option label="女" value="女"></el-option>
+                                <el-option label="其他" value=" "></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
                 <el-form-item label="单位">
                     <el-input v-model="company" ></el-input>
@@ -66,7 +75,7 @@
                     <el-col :span="6">
                         <el-form-item label="领域">
 <!--                            <el-input v-model="Form.type" ></el-input>-->
-                            <el-select v-model="area" placeholder="请选择">
+                            <el-select v-model="area" filterable placeholder="请选择">
                                 <el-option label="集成电路" value="集成电路"></el-option>
                                 <el-option label="人工智能" value="人工智能"></el-option>
                                 <el-option label="生物医药" value="生物医药"></el-option>
@@ -107,7 +116,7 @@
         components: {navi},
         data(){
             return{
-                id:'',
+                    id:'',
                     name:'',
                     phone:'',
                     gender:'',
@@ -118,26 +127,33 @@
                     introduction:'',
                     birth:'',
                 secretoptions: [{
-                    value: '机密',
-                    label: '机密'
+                    value: '一般',
+                    label: '一般'
                 }, {
-                    value: '秘密',
-                    label: '秘密'
-                }, {
-                    value: '绝密',
-                    label: '绝密'
+                    value: '重要',
+                    label: '重要'
                 }],
-                value: ''
+                value: '',
+                secretFlag:'',
+                secretshow:''
             }
         },
         methods:{
+            getService(){
+                // this.secretFlag=!this.secretFlag;
+                if (this.secretFlag==='是') this.secretshow=false
+                else this.secretshow=true
+                this.$forceUpdate()
+            },
             resetForm(){
-                this.birth='',
+                    this.birth='',
                     this.id='',
                     this.name='',
                     this.phone='',
                     this.gender='',
                     this.secret='',
+                    this.secretFlag='',
+                    this.secretshow='',
                     this.company='',
                     this.type='',
                     this.area='',

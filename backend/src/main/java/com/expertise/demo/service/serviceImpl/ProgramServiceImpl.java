@@ -45,7 +45,7 @@ public class ProgramServiceImpl implements ProgramService {
             Record record =new Record();
             record.setProgramID(id);
             //如果专家数量小于所需number 会越界
-            Integer EId=expertservice.findAll().get(i).getId();
+            String EId=expertservice.findAll().get(i).getId();
             record.setExpertID(EId);
             record.setTime(p.getTime());
             recordservice.insert(record);

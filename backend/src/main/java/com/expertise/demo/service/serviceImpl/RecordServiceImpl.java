@@ -38,7 +38,7 @@ public class RecordServiceImpl implements RecordService {
         return recordRepository.findById(id);
     }
 
-    public List<Record> findByExpert(Integer eid){
+    public List<Record> findByExpert(String eid){
         return recordRepository.findByExpertID(eid);
     }
     public List<Record> findByProgram(Integer pid){

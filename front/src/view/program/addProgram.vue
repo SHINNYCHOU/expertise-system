@@ -4,14 +4,23 @@
         <div style="margin-top: 10px">
             <el-form  label-width="100px">
                 <el-row :gutter="20">
-                    <el-col :span="6">
-                        <el-form-item label="项目名称">
-                            <el-input v-model="name" ></el-input>
-                        </el-form-item>
-                    </el-col>
+<!--                    <el-col :span="6">-->
+<!--                        <el-form-item label="项目名称">-->
+<!--                            <el-input v-model="name" ></el-input>-->
+<!--                        </el-form-item>-->
+<!--                    </el-col>-->
                     <el-col :span="4">
                         <el-form-item label="专家数量">
                             <el-input v-model="number" ></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6" style="align-items: end">
+                        <el-form-item label="类型">
+                            <el-select v-model="type" clearable placeholder="请选择">
+                                <el-option label="专业" value="专业"></el-option>
+                                <el-option label="财务" value="财务"></el-option>
+                                <el-option label="其他" value="其他"></el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -38,9 +47,9 @@
 <!--                        </el-form-item>-->
                     </el-col>
                     <el-col :span="6">
-                        <el-form-item label="类型">
+                        <el-form-item label="领域">
                             <!--                            <el-input v-model="Form.type" ></el-input>-->
-                            <el-select v-model="type" placeholder="请选择">
+                            <el-select v-model="area" placeholder="请选择">
                                 <el-option label="集成电路" value="集成电路"></el-option>
                                 <el-option label="人工智能" value="人工智能"></el-option>
                                 <el-option label="生物医药" value="生物医药"></el-option>
@@ -57,11 +66,6 @@
                                 <el-option label="空间信息（含北斗导航）" value="空间信息（含北斗导航）"></el-option>
                                 <el-option label="其他（含财务）" value="其他（含财务）"></el-option>
                             </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="9">
-                        <el-form-item label="领域">
-                            <el-input v-model="area" ></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="9">

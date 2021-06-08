@@ -10,5 +10,5 @@ public interface ExpertService {
      Expert insert(Expert expert);
      List<Expert> findAll();
      Expert findByName(String name);
-     Expert findById(Integer id);
+     Expert findById(String id);
 }

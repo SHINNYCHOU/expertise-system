@@ -12,7 +12,7 @@ import java.util.Date;
 public class Expert {
     @Id
     @ExcelProperty("专家身份证号")
-    private Integer id;
+    private String id;
     @ExcelProperty("专家姓名")
     private String name;
     @ExcelProperty("性别")
@@ -46,11 +46,11 @@ public class Expert {
         this.type=type;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
