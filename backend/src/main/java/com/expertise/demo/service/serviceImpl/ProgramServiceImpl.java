@@ -61,6 +61,7 @@ public class ProgramServiceImpl implements ProgramService {
                 candidates.add(e);
             }
         }
+        if (candidates.size()<2){return "专家太少，自动选满缺少专家";}
         for (int i=alreadyChose.size();i<neednum;i++){
             Record record =new Record();
             record.setProgramID(id);
@@ -81,6 +82,7 @@ public class ProgramServiceImpl implements ProgramService {
                 }
             }
             //random account
+            if (accounts.size()<2){return "专家太少，自动选满缺少专家";}
             Random rd=new Random(System.currentTimeMillis());
             String EId=accounts.get(rd.nextInt(accounts.size()-1)).getId();
             record.setExpertID(EId);
